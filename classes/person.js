@@ -1,6 +1,6 @@
 const Dog = require('./dog');
 
-class Person {
+/* class Person {
   constructor(name, age, dogs = []) {
     this.name = name;
     this.age = age;
@@ -19,6 +19,26 @@ class Person {
       console.log(`walking ${dog.name}`);
     });
   }
+} */
+
+function Person(name, age, dogs) {
+  this.name = name;
+  this.age = age;
+  this.dogs = dogs || [];
+}
+
+Person.prototype.addDog = function(dog) {
+  if (dog instanceof Dog) {
+    this.dogs.push(dog);
+  } else {
+    throw new TypeError("Argument must be an instance of Dog")
+  }
+}
+
+Person.prototype.walkDogs = function() {
+  this.dogs.forEach(function(dog) {
+    console.log("walking " + dog.name)
+  })
 }
 
 /****************************************************************************/
